@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApiService } from '../../shared/services/api.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent {
   hide = signal(true);
   errorMessage = signal('');
 
-  constructor(private fb: FormBuilder,private router: Router, private apiService: ApiService) {
+  constructor(private fb: FormBuilder,private router: Router, 
+    private apiService: ApiService, private userService: UserService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -62,6 +64,7 @@ export class LoginComponent {
         next: (response) => {
           console.log('Login successful', response);
           this.router.navigate(['/dashboard']);
+          this.userService.setUsername(email);
         },
         error: (err) => {
           this.loginError = 'Login failed. Please check your credentials.';

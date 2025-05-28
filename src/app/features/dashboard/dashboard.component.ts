@@ -1,4 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { UserService } from '../../shared/services/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +10,12 @@ import { Component, inject } from '@angular/core';
 })
 export class DashboardComponent {
   cookieValue: string = '';
-  username: string = 'Annie Pappachan'; 
-  constructor(){
+  username: string = ''; 
+  constructor(private userService: UserService) {
+    
+  }
+  ngOnInit() {
+    this.username = this.userService.getUserEmail();
   }
 
 }

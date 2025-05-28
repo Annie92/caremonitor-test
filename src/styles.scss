@@ -13,8 +13,10 @@ html {
     typography: Roboto,
     density: 0,
   ));
-}/* You can add global styles to this file, and also import other style files */
-
+}
+:root {
+  --red-color: #ff0000;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -29,3 +31,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .text-small { font-size: 0.875rem; } /* 14px */
 .text-primary { color: var(--primary-color); }
+.text-red { color: var(--red-color); }
