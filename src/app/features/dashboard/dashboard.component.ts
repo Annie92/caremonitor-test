@@ -13,7 +13,7 @@ export class DashboardComponent {
   username: string = 'Annie Pappachan'; 
   cookieService = inject(CookieService);
   constructor(){
-    this.cookieService.set('auth_token', 'mock-token');
+    // this.cookieService.set('auth_token', 'mock-token');
     this.cookieValue = this.cookieService.get('auth_token');
     console.log('Cookie Value:', this.cookieValue);
   }

@@ -7,6 +7,10 @@ import { Injectable } from '@angular/core';
 export class ApiService {
   constructor(private http: HttpClient) { }
 
+  login(email: string, password: string) {
+    return this.http.post('/api/login', { email, password });
+  }
+
   getItems() {
     return this.http.get('/api/items');
   }

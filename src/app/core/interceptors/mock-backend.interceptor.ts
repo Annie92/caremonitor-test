@@ -10,10 +10,28 @@ import { delay, mergeMap } from 'rxjs/operators';
 
 export const mockBackendInterceptor: HttpInterceptorFn = (req, next) => {
   const cookieService = inject(CookieService);
-  const { url, method, body } = req;
 
   return of(null).pipe(
     mergeMap(() => {
+
+      const { url, method, body } = req;
+
+      // POST /api/login
+      if (url.endsWith('/api/login') && method === 'POST') {
+        const { email, password } = body as { email: string; password: string };
+        console.log('Login submitted', { email, password });
+        if (email === 'admin@cm.au' && password === '123') {
+          cookieService.set('auth_token', 'mock-token');
+          return of(new HttpResponse({ status: 200, body: { token: 'mock-token' } }));
+        } else {
+          return throwError(() => ({
+            status: 401,
+            error: { message: 'Invalid credentials' }
+          }));
+        }
+      }
+
+
       // Mock GET /api/items
       if (url.endsWith('/api/items') && method === 'GET') {
         console.log('hi, this is Mock GET /api/items')
@@ -35,6 +53,6 @@ export const mockBackendInterceptor: HttpInterceptorFn = (req, next) => {
       // Pass through other requests
       return next(req);
     }),
-    delay(5000) // simulate latency
+    delay(3000) // simulate latency
   );
 };
