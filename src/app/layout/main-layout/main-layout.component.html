@@ -1,3 +1,10 @@
+<div *ngIf="loaderService.loading$ | async" class="spinner-overlay">
+  <mat-progress-spinner
+    mode="indeterminate"
+    color="primary"
+    diameter="60">
+  </mat-progress-spinner>
+</div>
 <app-header (logout)="handleLogout()"></app-header>
 <div class="page-content">
   <router-outlet></router-outlet>
