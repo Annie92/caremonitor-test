@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private token: string | null = null;
+  constructor(private cookieService: CookieService) {}
 
-  login(token: string): void {
-    this.token = token;
-  }
-  getToken(): string | null {
-    return this.token;
-  }
-  isLoggedIn(): boolean {
-    return this.token !== null;
+  logout() {
+    console.log('Logging out...');
+    this.cookieService.delete('auth_token');
   }
 }
