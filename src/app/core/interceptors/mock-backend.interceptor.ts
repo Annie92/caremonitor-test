@@ -6,10 +6,11 @@ import {
 import { inject } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap } from 'rxjs/operators';
-import { AuthService } from '../../auth/services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 export const mockBackendInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthService);
+  // const authService = inject(AuthService);
+  const cookieService = inject(CookieService);
 
   return of(null).pipe(
     mergeMap(() => {
@@ -21,9 +22,8 @@ export const mockBackendInterceptor: HttpInterceptorFn = (req, next) => {
         const { email, password } = body as { email: string; password: string };
         console.log('Login submitted', { email, password });
         if (email === 'admin@cm.au' && password === '123') {
-          // cookieService.set('auth_token', 'mock-token');
-          const mockToken =  'mock-token';
-          authService.login(mockToken);
+          cookieService.set('auth_token', 'mock-token');
+          
           return of(new HttpResponse({ status: 200, body: { token: 'mock-token' } }));
         } else {
           return throwError(() => ({
@@ -37,9 +37,9 @@ export const mockBackendInterceptor: HttpInterceptorFn = (req, next) => {
       // Mock GET /api/items
       if (url.endsWith('/api/items') && method === 'GET') {
         console.log('hi, this is Mock GET /api/items')
-        // const token = cookieService.get('auth_token');
-        const token = authService.getToken();
-        if (authService.isLoggedIn() && token) {
+        const token = cookieService.get('auth_token');
+        
+        if (token === 'mock-token') {
           const items = [
             { id: 1, name: 'Item One', description: 'Description for Item One' },
             { id: 2, name: 'Item Two', description: 'Description for Item Two' },
