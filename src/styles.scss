@@ -17,3 +17,15 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+//utility classes
+.m-1 { margin: 4px !important; }
+.m-2 { margin: 8px !important; }
+.mb-1 { margin-bottom: 4px !important; }
+.mb-2 { margin-bottom: 8px !important; }
+.mb-5 { margin-bottom: 20px !important; }
+.text-center { text-align: center; }
+.text-uppercase { text-transform: uppercase; }
+.text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.text-small { font-size: 0.875rem; } /* 14px */
+.text-primary { color: var(--primary-color); }

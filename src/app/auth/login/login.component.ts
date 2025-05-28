@@ -1,6 +1,9 @@
 import { Component, ChangeDetectionStrategy,signal } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { merge } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -8,7 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-login',
   imports: [
-    MatFormFieldModule, MatInputModule, FormsModule,ReactiveFormsModule
+    MatCardModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonModule, FormsModule,ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -16,7 +19,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class LoginComponent {
   readonly email = new FormControl('', [Validators.required, Validators.email]);
-
+  hide = signal(true);
   errorMessage = signal('');
 
   constructor() {
@@ -33,5 +36,10 @@ export class LoginComponent {
     } else {
       this.errorMessage.set('');
     }
+  }
+
+  clickEvent(event: MouseEvent) {
+    this.hide.set(!this.hide());
+    event.stopPropagation();
   }
 }
