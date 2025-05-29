@@ -20,4 +20,10 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should render welcome message', () => {
+    const fixture = TestBed.createComponent(DashboardComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome');
+  });
 });

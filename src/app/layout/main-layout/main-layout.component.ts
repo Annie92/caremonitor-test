@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SharedModule } from "../../shared/shared.module";
@@ -11,9 +11,10 @@ import { LoaderService } from '../../shared/services/loader.service';
   selector: 'app-main-layout',
   imports: [RouterModule,CommonModule, SharedModule, MatProgressSpinnerModule],
   templateUrl: './main-layout.component.html',
+  standalone: true,
   styleUrl: './main-layout.component.scss'
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements AfterViewInit {
   loading: Observable<boolean>;
   constructor(private router: Router,
     private cdr: ChangeDetectorRef,
@@ -24,12 +25,11 @@ export class MainLayoutComponent implements OnInit {
       this.loading = this.loaderService.loading$;
       console.log('MainLayoutComponent initialized loading:',this.loading);      
   }
-  ngOnInit() {
+  ngAfterViewInit() {
     this.loaderService.loading$.subscribe((isLoading:any) => {
-      setTimeout(() => {
-        this.cdr.detectChanges(); 
-        this.loading = isLoading;
-      });
+      console.log('loading$ emitted:', isLoading);
+      this.loading = isLoading;
+      this.cdr.detectChanges(); 
     });
   }
   handleLogout() {
