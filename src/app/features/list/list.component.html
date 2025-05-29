@@ -1,5 +1,5 @@
 <h1> All Items List </h1>
-<mat-card class="list-card" appearance="outlined">
+<mat-card class="list-card mb-5" appearance="outlined">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     
@@ -27,3 +27,18 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </mat-card>
+
+
+<!-- Signals Store -->
+<h2>Items from Signals Store</h2>
+<div *ngIf="loading()">Loading...</div>
+
+<div *ngIf="error()">{{ error() }}</div>
+
+<ul *ngIf="!loading() && !error()">
+  <li *ngFor="let item of items()">
+    <h3>{{item.id}} {{ item.name }}</h3>
+    <p>{{ item.description }}</p>
+  </li>
+</ul>
+

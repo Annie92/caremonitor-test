@@ -45,7 +45,7 @@ describe('ApiService', () => {
 
   describe('#getItems', () => {
     it('should send GET request to /api/items', () => {
-      const mockItems = [{ id: 1, name: 'Item One' }];
+      const mockItems = [{ id: 1, name: 'Item One', description: 'Description of Item One' }];
 
       service.getItems().subscribe((res) => {
         expect(res).toEqual(mockItems);
