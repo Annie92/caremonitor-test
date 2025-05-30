@@ -55,13 +55,13 @@ This is a simple Angular(19) application that demonstrates:
 
 ## Architecture Overview
 ## Folder Structure
-src/
-├── app/
-│   ├── core/               # Core module ( interceptors )
-│   ├── shared/             # Shared module (Reusable components, services, pipes, directives)
-│   ├── auth/               # Auth Module (Login component, auth service, auth guard)
-│   ├── features/           # Feature modules (list),  feature components (dashboard)
-│   ├── layout              # Main layout component
-│   └── app-routing.module.ts
+#src/
+#├── app/
+#│   ├── core/               # Core module ( interceptors )
+#│   ├── shared/             # Shared module (Reusable components, services, pipes, directives)
+#│   ├── auth/               # Auth Module (Login component, auth service, auth guard)
+#│   ├── features/           # Feature modules (list),  feature components (dashboard)
+#│   ├── layout              # Main layout component
+#│   └── app-routing.module.ts
 
 
