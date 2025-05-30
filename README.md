@@ -19,6 +19,7 @@ ng s
 ```
 ### 4. Navigate to App
 Visit http://localhost:4200
+login using email: admin@cm.au and pw: 123
 
 
 ##  To Run Tests
